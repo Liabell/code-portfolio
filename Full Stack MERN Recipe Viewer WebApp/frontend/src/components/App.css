@@ -1,0 +1,123 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.banner {
+  max-height: 200px; /* Set the maximum height of the banner image */
+}
+
+.Search {
+  margin-bottom: 20px;
+}
+
+.Search input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  width: 40%; /* Set the width to 40% of the screen */
+  border-radius: 10px; /* Rounded edges */
+  border: 1px solid #ccc; 
+  background-image: url('https://media.istockphoto.com/id/924437708/vector/magnifying-glass-icon.jpg?s=612x612&w=0&k=20&c=VXDoaQ6Ns61N2v6CsMXX-vYlG5oUY3ufoUncvUp1zNY=');
+  background-repeat: no-repeat;
+  background-position: left 8px center; /* Position the magnifying glass icon */
+  background-size: 30px; /* Scale the icon */
+  padding-left: 30px; /* Leave space for the icon */
+}
+
+.Search button.searchButton {
+  padding: 8px 16px;
+  background-color: turquoise; 
+  color: #fff; 
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.Search button.searchButton,
+.dbButton { 
+  padding: 8px 16px;
+  background-color: turquoise; 
+  color: #fff; 
+  border: none;
+  cursor: pointer;
+  border-radius: 20px; 
+  margin-left: 10px;
+}
+
+.dbButton {
+  float: right; 
+  margin-right: 5%;
+}
+
+.SearchResults {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.RecipeCard {
+  border: none;
+  padding: 10px;
+  width: 20%; /* 20% width for each card */
+  box-sizing: border-box; 
+  text-align: left;
+  border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.RecipeCard.showIngredients {
+  height: auto;
+}
+
+.RecipeCard img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; 
+  margin: auto; 
+}
+
+.RecipeCard h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.RecipeCard p {
+  margin: 5px 0;
+}
+
+.RecipeCard a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+h4 {
+  margin-bottom: 10px; /* Add space below the heading */
+}
+
+h4::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .RecipeCard {
+    width: 100%; /* Screen width cards for mobile devices */
+  }
+}
