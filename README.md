@@ -1,0 +1,1 @@
+A collection of different coding projects I worked on during my Computer Science Bachelor's Degree at Florida Tech
