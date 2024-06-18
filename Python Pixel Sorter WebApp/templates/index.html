@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Sorting App</title>
+</head>
+<body>
+    <h1>Pixel Sorting App</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <label for="file">Choose an image:</label>
+        <input type="file" id="file" name="file" accept="image/*" required><br><br>
+
+        <label><h2>Interval Function</h2>Controls how the intervals used for sorting are defined. See below for more details and examples. Threshold by default.</label>
+        <table border="1">
+            <tr>
+                <th>Function</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Random</td>
+                <td>Randomly generate intervals. Distribution of widths is linear by default. Interval widths can be scaled using char_length.</td>
+            </tr>
+            <tr>
+                <td>Edges</td>
+                <td>Performs an edge detection, which is used to define intervals. Tweak threshold with threshold.</td>
+            </tr>
+            <tr>
+                <td>Threshold</td>
+                <td>Intervals defined by lightness thresholds; only pixels with a lightness between the upper and lower thresholds are sorted.</td>
+            </tr>
+            <tr>
+                <td>Waves</td>
+                <td>Intervals are waves of nearly uniform widths. Control width of waves with char_length.</td>
+            </tr>
+            <tr>
+                <td>File</td>
+                <td>Intervals taken from another specified input image. Must be black and white, and the same size as the input image.</td>
+            </tr>
+            <tr>
+                <td>File-Edges</td>
+                <td>Intervals defined by performing edge detection on the file specified by -f. Must be the same size as the input image.</td>
+            </tr>
+            <tr>
+                <td>None</td>
+                <td>Sort whole rows, only stopping at image borders.</td>
+            </tr>
+        </table>
+
+        <select id="interval_function" name="interval_function">
+            <option value="random">Random</option>
+            <option value="edges">Edges</option>
+            <option value="threshold" selected>Threshold</option>
+            <option value="waves">Waves</option>
+            <option value="file">File</option>
+            <option value="file-edges">File Edges</option>
+            <option value="none">None</option>
+        </select>
+
+        <input type="checkbox" id="all_functions" name="all_functions">
+        <label for="all_functions">All Functions (Applies each Interval Function separately)</label><br><br><br>
+
+        <label for="randomness"> <h2>Randomness</h2>What percentage of intervals not to sort 0 - 100</label><br>
+        <input type="number" id="randomness" name="randomness" min="0" step="0.01" value="0"><br><br>
+
+        <label for="lower_threshold"><h2>Lower Threshold</h2>How dark must a pixel be to be considered as a 'border' for sorting? Used in edges and threshold modes 0.00 - 1.00</label><br>
+        <input type="number" id="lower_threshold" name="lower_threshold" min="0" max="1" step="0.01" value="0.25"><br><br>
+
+        <label for="upper_threshold"><h2>Upper Threshold</h2>How bright must a pixel be to be considered as a 'border' for sorting? Used in threshold mode. 0.00 - 1.00 </label><br>
+        <input type="number" id="upper_threshold" name="upper_threshold" min="0" max="1" step="0.01" value="0.8"><br><br>
+
+        <label for="angle"><h2>Angle</h2>Angle at which you're pixel sorting in degrees. 0 - 360</label><br>
+        <input type="number" id="angle" name="angle" min="0" max="360" step="1" value="0"><br><br>
+
+        <label for="sorting_function"><h2>Sorting Function</h2>Sorting function to use for sorting the pixels</label><br>
+        <table border="1">
+            <tr>
+                <th>Function</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Lightness</td>
+                <td>Sort by the lightness of a pixel according to a HSL representation.</td>
+            </tr>
+            <tr>
+                <td>Hue</td>
+                <td>Sort by the hue of a pixel according to a HSL representation.</td>
+            </tr>
+            <tr>
+                <td>Saturation</td>
+                <td>Sort by the saturation of a pixel according to a HSL representation.</td>
+            </tr>
+            <tr>
+                <td>Intensity</td>
+                <td>Sort by the intensity of a pixel, i.e. the sum of all the RGB values.</td>
+            </tr>
+            <tr>
+                <td>Minimum</td>
+                <td>Sort on the minimum RGB value of a pixel (either the R, G, or B).</td>
+            </tr>
+        </table>
+        <select id="sorting_function" name="sorting_function">
+            <option value="lightness">Lightness</option>
+            <option value="hue">Hue</option>
+            <option value="saturation">Saturation</option>
+            <option value="intensity">Intensity</option>
+            <option value="minimum">Minimum</option>
+        </select><br><br>
+
+        <label for="external_interval_file"><h2>External Interval File</h2>	Image used to define intervals. Must be black and white.</label><br>
+        <input type="file" id="external_interval_file" name="external_interval_file" accept="image/*"><br><br>
+
+        <label for="mask"><h2>Mask</h2>Image used for masking parts of the image.</label><br>
+        <input type="file" id="mask" name="mask" accept="image/*"><br><br>
+
+        <input type="submit" value="Upload and Sort">
+    </form>
+</body>
+</html>
