@@ -1,15 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Sorted Image</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_result.css') }}">
 </head>
 <body>
-  <h1>Original Image</h1>
-  <img src="/uploads/{{ original }}" alt="Original Image">
-  <h1>Sorted Image</h1>
-  <img src="/uploads/{{ sorted }}" alt="Sorted Image">
-  <br><br>
-  <a href="/">Upload Another Image</a>
+  <header>
+    <img src="{{ url_for('static', filename='images/logo_sorted.png') }}" alt="Logo"><br>
+  </header>
+
+  <div class="flex-container">
+    <div class="card">
+      <h1>Original Image</h1>
+      <img src="/uploads/{{ original }}" alt="Original Image">
+    </div>
+
+    <div class="card">
+      <h1>Sorted Image</h1>
+      <img src="/uploads/{{ sorted }}" alt="Sorted Image">
+    </div>
+  </div>
+
+  <a href="/"><h2>Upload Another File</h2></a><br><br>
 </body>
 </html>

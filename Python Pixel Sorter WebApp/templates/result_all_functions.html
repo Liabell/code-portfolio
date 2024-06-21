@@ -1,38 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+<header>
+  <img src="{{ url_for('static', filename='images/logo_sorted.png') }}" alt="Logo"><br>
+</header>
 <head>
   <meta charset="UTF-8">
   <title>Results - All Functions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_result_all_functions.css') }}">
 </head>
 <body>
   <h1>Results - All Functions</h1>
-  <h2>Original Image</h2>
-  <img src="{{ url_for('send_file', filename=original) }}" alt="Original Image"><br><br>
+  <div class="card">
+    <h1>Original Image</h1>
+    <img src="{{ url_for('send_file', filename=original) }}" alt="Original Image"><br><br><br><br>
+  </div>
   
-  <h2>Sorted Images</h2>
-  {% for file in sorted_files %}
-    {% set func = file.split('_')[1] %}
-    <h3>{{ file }}</h3>
-    <p>
-      {% if func == 'random' %}
-        Random Interval Function
-      {% elif func == 'edges' %}
-        Edges Interval Function
-      {% elif func == 'threshold' %}
-        Threshold Interval Function
-      {% elif func == 'waves' %}
-        Waves Interval Function
-      {% elif func == 'char' %}
-        Random / Waves Interval Function with applied Characteristic Length
-      {% elif func == 'file' %}
-        File Interval Function
-      {% elif func == 'file-edges' %}
-        File Edges Interval Function
-      {% elif func == 'none' %}
-        None Interval Function
-      {% endif %}
-    </p>
-    <img src="{{ url_for('send_file', filename=file) }}" alt="Sorted Image"><br><br>
-  {% endfor %}
+  <div class="card">
+    <h1>Sorted Images</h1>
+    {% for file in sorted_files %}
+      {% set func = file.split('_')[1] %}
+      <h3>{{ file }}</h3>
+      <p>
+        {% if func == 'random' %}
+          Random Interval Function
+        {% elif func == 'edges' %}
+          Edges Interval Function
+        {% elif func == 'threshold' %}
+          Threshold Interval Function
+        {% elif func == 'waves' %}
+          Waves Interval Function
+        {% elif func == 'char' %}
+          Random / Waves Interval Function with applied Characteristic Length
+        {% elif func == 'file' %}
+          File Interval Function
+        {% elif func == 'file-edges' %}
+          File Edges Interval Function
+        {% elif func == 'none' %}
+          None Interval Function
+        {% endif %}
+      </p>
+      <img src="{{ url_for('send_file', filename=file) }}" alt="Sorted Image"><br><br>
+    {% endfor %}
+  </div>
+
+  <a href="/"><h2>Upload Another File</h2></a><br><br>
 </body>
 </html>
