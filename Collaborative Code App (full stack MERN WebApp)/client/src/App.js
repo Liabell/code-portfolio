@@ -10,6 +10,9 @@ const App = () => {
   const [isVoiceCallActive, setIsVoiceCallActive] = useState(false);
   const [currentUserId, setCurrentUserId] = useState("user123"); // Dummy user ID for testing
   const [executionOutput, setExecutionOutput] = useState(""); // Store Python code execution output
+  const [isChecklistView, setIsChecklistView] = useState(false); // Toggle between editor and checklist view
+  const [checklistItems, setChecklistItems] = useState([]); // List of checklist items
+  const [newItem, setNewItem] = useState(""); // New item input field
   const [newFileName, setNewFileName] = useState(""); // New file name input
 
   // Fetch list of files from the backend (database)
@@ -29,6 +32,7 @@ const App = () => {
       .get(`http://localhost:5000/api/files/${fileId}`)
       .then((response) => {
         setSelectedFile(response.data); // Set the selected file to state
+        setIsChecklistView(false); // Ensure checklist is not shown when a file is selected
       })
       .catch((err) => console.error(err));
   };
@@ -106,6 +110,30 @@ const App = () => {
     }
   };
 
+  // Handle switching to the checklist view
+  const handleChecklistToggle = () => {
+    setIsChecklistView(true);
+    setSelectedFile(null); // Clear the file content when switching to checklist
+  };
+
+  // Handle switching back to the text editor
+  const handleBackToEditor = () => {
+    setIsChecklistView(false);
+  };
+
+  // Handle adding a new item to the checklist
+  const handleAddItem = () => {
+    if (newItem.trim()) {
+      setChecklistItems((prevItems) => [...prevItems, newItem]);
+      setNewItem(""); // Clear input field after adding the item
+    }
+  };
+
+  // Handle checking an item (remove from the checklist)
+  const handleItemCheck = (index) => {
+    setChecklistItems((prevItems) => prevItems.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="app-container">
       <h1 className="app-title">Collaborative Text Editor</h1>
@@ -152,24 +180,52 @@ const App = () => {
 
         {/* Collaborative Text Editor Section */}
         <div className="text-editor card">
-          {selectedFile ? (
+          {isChecklistView ? (
             <>
-              <FileEditor
-                file={selectedFile} // Make sure the file prop updates
-                setFile={setSelectedFile} // Ensure this is being called to update content in the parent
-                currentUserId={currentUserId}
-                handleFileUpdate={handleFileUpdate} // Pass the handleFileUpdate function to save changes
-              />
-              <button className="save-button" onClick={executePythonCode}>
-                Run Code
-              </button>
-              <div className="execution-output">
-                <h2 className="execHeader">Execution Output:</h2>
-                <pre>{executionOutput}</pre>
+              <h2 className="checklistHeader">Checklist</h2>
+              <ul className="checklistList">
+                {checklistItems.map((item, index) => (
+                  <li key={index}>
+                    <input className="checklistCheckButton"
+                      type="checkbox" 
+                      onChange={() => handleItemCheck(index)} 
+                    /> {item}
+                  </li>
+                ))}
+              </ul>
+              <div>
+                <input
+                  className="checklistInput"
+                  type="text"
+                  value={newItem}
+                  onChange={(e) => setNewItem(e.target.value)}
+                  placeholder="Add new item"
+                />
+                <button className="checklistAddButton" onClick={handleAddItem}>Add Item</button>
               </div>
+              <button className="textEditorButton" onClick={handleBackToEditor}>Back to Text Editor</button>
             </>
           ) : (
-            <p>Select a file to start editing.</p>
+            selectedFile ? (
+              <>
+                <button className="checklistButton" onClick={handleChecklistToggle}>Switch to Checklist</button>
+                <FileEditor
+                  file={selectedFile}
+                  setFile={setSelectedFile}
+                  currentUserId={currentUserId}
+                  handleFileUpdate={handleFileUpdate}
+                />
+                <button className="save-button" onClick={executePythonCode}>
+                  Run Code
+                </button>
+                <div className="execution-output">
+                  <h2 className="execHeader">Execution Output:</h2>
+                  <pre>{executionOutput}</pre>
+                </div>
+              </>
+            ) : (
+              <p>Select a file to get started.</p>
+            )
           )}
         </div>
       </div>

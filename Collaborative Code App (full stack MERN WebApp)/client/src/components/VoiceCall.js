@@ -96,7 +96,7 @@ const VoiceCall = ({ isActive, setIsVoiceCallActive }) => {
 
   return (
     <div>
-      <h2>Your Peer ID:</h2>
+      <h2>Your Call ID:</h2>
       <p className="peerId">{peerId}</p>
       {isActive ? (
         <div>
