@@ -1,0 +1,241 @@
+/* General styles */
+/* Body Background */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Fallback color */
+}
+
+/* Background Image with Rotation */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./background.png') no-repeat center center;
+  background-size: cover;
+  z-index: -1; /* Place it behind the content */
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.app-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  padding: 20px; /* Add padding to create space around the text */
+  background: linear-gradient(135deg, rgb(0, 255, 242), rgb(64, 159, 155));
+  border-radius: 15px; /* Create rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Apply shadow to the container */
+  display: inline-block; /* Make the container fit the text */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Grid Layout */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two columns: left (1fr) and right (2fr) */
+  grid-template-rows: auto auto; /* Two rows: adjust height automatically */
+  gap: 20px; /* Space between grid items */
+}
+
+p, h2 {
+  color: whitesmoke;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3)
+}
+
+/* Card Component */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1;
+}
+
+/* File Selector Card (Top Left) */
+.file-selector.card {
+  grid-column: 1; /* Place in the first column */
+  grid-row: 1; /* Place in the first row */
+  max-width: 100%; /* Take full width of its grid cell */
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Voice Call Card (Bottom Left) */
+.voice-call.card {
+  grid-column: 1; /* Place in the first column */
+  grid-row: 2; /* Place in the second row */
+  max-width: 100%; /* Take full width of its grid cell */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.file-list {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  text-align: center;
+}
+
+.file-list li {
+  margin-bottom: 15px; /* Add vertical spacing between buttons */
+}
+
+.create-file {
+  margin-top: 20px;
+}
+
+.create-file input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.create-file button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgb(233, 22, 201), rgb(188, 135, 181));
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.create-file button:hover {
+  background-color: rgba(214, 156, 156, 0.42);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(183, 22, 201, 0.42), rgba(128, 135, 181, 0.5));
+}
+
+.delete-button {
+  background-color: rgba(214, 156, 156, 0.42);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, transform 0.1s;
+  padding: 10px 15px;
+}
+
+.delete-button:hover {
+  background-color: rgba(138, 102, 102, 0.42);
+  transform: translateY(-2px);
+}
+
+/* Buttons */
+.file-button, .voice-button {
+  width: 50%;
+  padding: 10px 15px;
+  background-color: rgba(255, 224, 224, 0.919);
+  color: black;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.file-button:hover, .voice-button:hover, .save-button:hover {
+  background-color: rgba(214, 156, 156, 0.42);
+  transform: translateY(-2px);
+}
+
+/* Peer ID Styling */
+.peerId, .fileName {
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 2px 6px;
+  background: linear-gradient(135deg, rgb(0, 255, 242), rgb(64, 159, 155));
+  color: rgb(45, 45, 45);
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px auto;
+  width: auto;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-editor.card {
+  grid-column: 2; /* Place in the second column */
+  grid-row: 1 / span 2; /* Span across both rows */
+  display: flex; /* Make the card a flex container */
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: space-between; /* Push the button to the bottom */
+  padding: 20px; /* Add padding around the card */
+  position: relative; /* Enable absolute positioning for child elements */
+  box-sizing: border-box; /* Ensure padding is included in the card's dimensions */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  gap: 10px;
+}
+
+/* Text Box Inside Card */
+.text-editor.card .text-box {
+  flex-grow: 1; /* Allow the text box to take up remaining vertical space */
+  margin-bottom: 20px; /* Add space between the text box and save button */
+}
+
+/* CollabBox container (for background and basic text styling) */
+.collabBox {
+  background-color: #333333e6;
+  color: rgb(224, 224, 224);
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;  /* Ensure text is aligned to the left in the container */
+  padding: 10px;
+}
+
+/* Additional styles for CodeMirror to ensure left alignment */
+.cm-content {
+  text-align: left !important; /* Force left alignment for the editor's content */
+}
+
+.cm-scroller {
+  overflow-y: auto !important;  /* Prevents vertical scrolling issue */
+}
+
+.execHeader {
+  color: rgba(31, 29, 29, 0.891);
+}
+
+.execution-output {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(254, 240, 240, 0.781);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
+  font-weight: bold;
+}
+
+.execution-output pre {
+  text-align: left;
+}
+
+/* Save Button */
+.save-button {
+  padding: 10px 20px;
+  background-color: rgba(255, 224, 224, 0.919);
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  align-self: center; /* Center the button horizontally within the card */
+}
